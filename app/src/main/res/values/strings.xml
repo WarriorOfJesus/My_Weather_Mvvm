@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">My Weather</string>
+    <string name="key">7efc1c09030de318b28796f20306cab0</string>
+    <string name="weather_api">https://api.openweathermap.org/data/2.5/weather?q={city name}appid={7efc1c09030de318b28796f20306cab0}</string>
+    <string name="base_url">https://api.openweathermap.org</string>
+    <string name="enter_the_city_name">Enter the city name</string>
+    <string name="cityName">CITY</string>
+    <string name="degrees">0</string>
+    <string name="speed_of_wind">СКОРОСТЬ ВЕТРА</string>
+    <string name="cloudCover">Облачность</string>
+    <string name="visibility">Видимость</string>
+    <string name="humidity">Влажность</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
