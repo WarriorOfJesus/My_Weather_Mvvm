@@ -4,18 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.myweather.R
-import com.example.common.mvp.BaseFragment
 import com.example.common.mvp.BaseMvpFragment
+import com.example.myweather.R
 import com.example.myweather.api.RetrofitClient
-import com.example.myweather.api.WeatherApi
 import com.example.myweather.databinding.FragmentWeather2Binding
-import com.example.myweather.databinding.FragmentWeatherBinding
-import com.example.myweather.interactor.WeatherInteractor
-import com.example.myweather.main_page.ui.KelvinConverter
-import com.example.myweather.repository.WeatherRemoteRepository
 import com.example.myweather.ui.WeatherFragment
-import com.example.myweather.ui.WeatherPresenter
 import com.example.myweather.utils.changeFragment
 import com.example.weeklyWeather.api.FiveDaysWeatherApi
 import com.example.weeklyWeather.interactor.FiveDaysInteractor
@@ -36,7 +29,6 @@ class FragmentWeather2 :
 
     private val interactor: FiveDaysInteractor = FiveDaysInteractor(remoteRepository)
     override val presenter: FiveDaysPresenter = FiveDaysPresenter(interactor = interactor)
-    private val kelvinConverter = KelvinConverter()
 
     private lateinit var binding: FragmentWeather2Binding
 

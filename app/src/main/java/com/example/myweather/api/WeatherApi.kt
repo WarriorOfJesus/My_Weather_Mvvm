@@ -9,7 +9,8 @@ interface WeatherApi {
     @GET("data/2.5/weather")
     fun getWeatherData(
         @Query("q") cityName: String,
-        @Query("appid") apiKey : String
+        @Query("appid") apiKey : String,
+        @Query("units") metric:String = "metric"
     ): Call<WeatherDataResponse>
 
 }

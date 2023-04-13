@@ -13,9 +13,6 @@ import com.example.myweather.R
  * create an instance of this fragment.
  */
 class InformationFor5days : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

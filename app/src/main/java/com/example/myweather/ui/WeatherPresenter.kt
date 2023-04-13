@@ -4,6 +4,7 @@ import android.util.Log
 import android.widget.Toast
 import com.example.common.mvp.BasePresenter
 import com.example.myweather.interactor.WeatherInteractor
+import timber.log.Timber
 
 class WeatherPresenter(
     private val interactor: WeatherInteractor
@@ -19,7 +20,7 @@ class WeatherPresenter(
                     view?.showInfo()
                 }
             } catch (t: Throwable) {
-                Log.e("Error get weather data ", t.message.toString())
+                Timber.d("error get weather---->>>> ${t.message}")
                 view?.showErrorMessage()
             } finally {
                 view?.showLoading(false)

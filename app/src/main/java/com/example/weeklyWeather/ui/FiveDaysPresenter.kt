@@ -1,8 +1,8 @@
 package com.example.weeklyWeather.ui
 
-import android.util.Log
 import com.example.common.mvp.BasePresenter
 import com.example.weeklyWeather.interactor.FiveDaysInteractor
+import timber.log.Timber
 
 class FiveDaysPresenter(
     private val interactor: FiveDaysInteractor
@@ -16,7 +16,7 @@ class FiveDaysPresenter(
                 val list = data.list
                 view?.showFiveDaysData(list)
             } catch (t: Throwable) {
-                Log.e("Error get five days weather data ", t.message.toString())
+                Timber.tag("Error get five days weather data ").e(t.message.toString())
                 view?.showError(t.message.toString())
             } finally {
                 view?.showLoading(isLoading = false)
