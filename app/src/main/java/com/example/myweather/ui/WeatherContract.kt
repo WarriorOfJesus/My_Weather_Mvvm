@@ -1,8 +1,8 @@
 package com.example.myweather.ui
 
-import com.example.myweather.common.mvp.BaseFragmentContract
-import com.example.myweather.common.mvp.MvpPresenter
-import com.example.myweather.common.mvp.MvpView
+import com.example.common.mvp.BaseFragmentContract
+import com.example.common.mvp.MvpPresenter
+import com.example.common.mvp.MvpView
 import com.example.myweather.model.WeatherData
 
 interface WeatherContract: BaseFragmentContract {

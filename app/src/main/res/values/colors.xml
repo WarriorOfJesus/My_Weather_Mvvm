@@ -11,5 +11,8 @@
     <color name="back">#99968C</color>
     <color name="transparent_linear">#99414945</color>
     <color name="black2">#99FFFFFF</color>
+    <color name="black3">#FF000111</color>
+    <color name="empty">#01FFFFFF</color>
+    <color name="empty2">#13FFFFFF</color>
 
 </resources>

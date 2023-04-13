@@ -1,4 +1,4 @@
-package com.example.myweather.common.mvp
+package com.example.common.mvp
 
 interface MvpPresenter<V : MvpView> {
     fun attach(view: V)

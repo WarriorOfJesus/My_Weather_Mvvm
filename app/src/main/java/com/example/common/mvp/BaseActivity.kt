@@ -1,4 +1,4 @@
-package com.example.myweather.common.mvp
+package com.example.common.mvp
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment

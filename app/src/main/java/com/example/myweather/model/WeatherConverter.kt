@@ -6,7 +6,7 @@ object WeatherConverter {
     fun fromNetwork(response: WeatherDataResponse?): WeatherData {
         return WeatherData(
             coord = response?.let { fromNetwork(it.coord) } ?: Coord(0.0, 0.0),
-            weather = response?.let { fromNetwork(it.weather) } ?: emptyList(),
+            weather = response?.let { fromNetworkWeather(it.weather) } ?: emptyList(),
             base = response?.base ?: "",
             main = response?.let { fromNetwork(it.main) } ?: Main(0.0, 0.0, 0.0, 0.0, 0, 0, 0, 0),
             visibility = response?.visibility ?: 0,
@@ -65,7 +65,7 @@ object WeatherConverter {
         )
     }
 
-    private fun fromNetwork(response: List<WeatherResponse>): List<Weather> {
+    private fun fromNetworkWeather(response: List<WeatherResponse>): List<Weather> {
         return response.map { data ->
             Weather(
                 id = data.id,

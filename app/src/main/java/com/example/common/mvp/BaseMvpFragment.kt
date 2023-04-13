@@ -1,4 +1,4 @@
-package com.example.myweather.common.mvp
+package com.example.common.mvp
 
 import android.os.Bundle
 import android.view.View
