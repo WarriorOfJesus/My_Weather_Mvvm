@@ -7,6 +7,7 @@ import com.example.weeklyWeather.model.FiveDays
 import com.example.weeklyWeather.model.WeatherWeeklyConverter
 import retrofit2.Call
 import retrofit2.Response
+import timber.log.Timber
 
 class FiveDaysRemoteRepository(private val api: FiveDaysWeatherApi) : FiveDaysRepository {
     private var fiveDays: FiveDays? = null
@@ -24,7 +25,7 @@ class FiveDaysRemoteRepository(private val api: FiveDaysWeatherApi) : FiveDaysRe
             }
 
             override fun onFailure(call: Call<FiveDaysResponse>, t: Throwable) {
-                Log.e("FiveDays", "onResponse: ${t.message}", t)
+                Timber.e("FiveDays onResponse: " + t.message)
             }
 
         })

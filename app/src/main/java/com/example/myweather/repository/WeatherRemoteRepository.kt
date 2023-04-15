@@ -8,6 +8,7 @@ import com.example.myweather.model.WeatherData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import timber.log.Timber
 
 class WeatherRemoteRepository(
     private val api: WeatherApi
@@ -27,7 +28,7 @@ class WeatherRemoteRepository(
             }
 
             override fun onFailure(call: Call<WeatherDataResponse>, t: Throwable) {
-                Log.e("WeatherData", "onResponse: ${t.message}", t)
+                Timber.e("WeatherData onResponse: " + t.message)
             }
         })
         return weatherData

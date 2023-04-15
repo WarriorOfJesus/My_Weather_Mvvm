@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
+import androidx.lifecycle.ViewModel
 import com.example.myweather.R
 import com.example.myweather.api.RetrofitClient
 import com.example.common.mvp.BaseMvpFragment
@@ -27,6 +28,14 @@ class WeatherFragment :
 
     private val key: String by lazy {
         getString(R.string.key)
+    }
+
+    companion object{
+        fun getNewInstance(args:Bundle?):WeatherFragment{
+            val weatherFragment = WeatherFragment()
+            weatherFragment.arguments = args
+            return weatherFragment
+        }
     }
 
     private val api: WeatherApi =
@@ -70,21 +79,17 @@ class WeatherFragment :
             }
             buttonMoreInfo.setOnClickListener {
                 val fragment = FragmentWeather2()
+                fragment.arguments?.putAll(savedInstanceState)
                 changeFragment(fragment = fragment, R.id.fragmentContainer)
+
             }
         }
     }
 
     override fun showWeatherData(data: WeatherData) {
         with(binding) {
-//                           degrees.text = "${data?.main?.temp.toString()} °C" "${data?.wind?.speed.toString()}  м/с"
             cityName.text = data.name
-            degrees.text = "${data.main.temp.roundToInt()} °C"
-//            binding.speedOfWindText.text = "${data.wind.speed}  м/с"
-//            binding.cloudiness.text = "${data.clouds.all}  %"
-//            pressureText.text = "${data.main.pressure} гПа"
-//
-//            visibilityText.text = kelvinConverter.metersiNKilometrs(data.visibility)
+            "${data.main.temp.roundToInt()} °C".also { degrees.text = it }
             description.text = if (data.weather.isNotEmpty())
                 data.weather.first().description
             else print("sorry").toString()
@@ -125,7 +130,6 @@ class WeatherFragment :
             cityName.text = ""
             degrees.text = ""
             description.text = ""
-//            pressure.isVisible = false // сделать давление
         }
     }
 

@@ -1,7 +1,8 @@
-package com.example.myweather
+package com.example
 
 import android.os.Bundle
 import com.example.common.mvp.BaseActivity
+import com.example.myweather.R
 import com.example.myweather.databinding.ActivityMainBinding
 import com.example.myweather.ui.WeatherFragment
 

@@ -1,7 +1,5 @@
 package com.example.myweather.ui
 
-import android.util.Log
-import android.widget.Toast
 import com.example.common.mvp.BasePresenter
 import com.example.myweather.interactor.WeatherInteractor
 import timber.log.Timber

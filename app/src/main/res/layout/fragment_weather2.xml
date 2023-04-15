@@ -66,7 +66,7 @@
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_gravity="bottom"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="10dp"
         android:layout_marginBottom="240dp"
         android:background="@color/black2"
         android:orientation="vertical">
@@ -102,7 +102,7 @@
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_gravity="bottom"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="10dp"
         android:layout_marginBottom="110dp"
         android:background="@color/black2"
         android:orientation="vertical">
@@ -137,7 +137,7 @@
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_gravity="bottom"
-        android:layout_marginStart="150dp"
+        android:layout_marginStart="140dp"
         android:layout_marginBottom="240dp"
         android:background="@color/black2"
         android:orientation="vertical">
@@ -173,7 +173,7 @@
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_gravity="bottom"
-        android:layout_marginStart="280dp"
+        android:layout_marginStart="270dp"
         android:layout_marginBottom="240dp"
         android:background="@color/black2"
         android:orientation="vertical">
@@ -193,6 +193,7 @@
             android:textSize="12sp" />
 
         <TextView
+            android:id="@+id/humidityText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -227,7 +228,7 @@
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_gravity="bottom"
-        android:layout_marginStart="150dp"
+        android:layout_marginStart="140dp"
         android:layout_marginBottom="110dp"
         android:background="@color/black2"
         android:orientation="vertical">
@@ -262,7 +263,7 @@
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_gravity="bottom"
-        android:layout_marginStart="280dp"
+        android:layout_marginStart="270dp"
         android:layout_marginBottom="110dp"
         android:background="@color/black2"
         android:orientation="vertical">

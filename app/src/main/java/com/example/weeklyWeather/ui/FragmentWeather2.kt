@@ -4,16 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.example.common.mvp.BaseMvpFragment
 import com.example.myweather.R
 import com.example.myweather.api.RetrofitClient
 import com.example.myweather.databinding.FragmentWeather2Binding
+import com.example.myweather.model.WeatherData
 import com.example.myweather.ui.WeatherFragment
 import com.example.myweather.utils.changeFragment
 import com.example.weeklyWeather.api.FiveDaysWeatherApi
 import com.example.weeklyWeather.interactor.FiveDaysInteractor
+import com.example.weeklyWeather.model.FiveDays
 import com.example.weeklyWeather.model.FiveDaysWeather
 import com.example.weeklyWeather.repository.FiveDaysRemoteRepository
+import timber.log.Timber
+import kotlin.math.roundToInt
 
 class FragmentWeather2 :
     BaseMvpFragment<FiveDaysContract.View, FiveDaysContract.Presenter>
@@ -21,6 +26,8 @@ class FragmentWeather2 :
     private val key: String by lazy {
         getString(R.string.key)
     }
+    private val bundle = Bundle()
+
     private val api: FiveDaysWeatherApi =
         RetrofitClient.getClient("https://api.openweathermap.org")
             .create(FiveDaysWeatherApi::class.java)
@@ -43,10 +50,11 @@ class FragmentWeather2 :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        with(binding){
+        with(binding) {
             buttonBack.setOnClickListener {
                 val fragment = WeatherFragment()
                 changeFragment(fragment, R.id.fragmentContainer)
+                presenter.getWeatherData("Bishkek", key)
             }
             buttonInfoFor5days.setOnClickListener {
                 val fragment = InformationFor5days()
@@ -54,24 +62,45 @@ class FragmentWeather2 :
             }
         }
     }
+
     override fun showLoading(isLoading: Boolean) {
 
     }
 
     override fun showError(error: String) {
-        TODO("Not yet implemented")
+        Timber.d("---->>>> $error")
     }
 
     override fun showFiveDaysData(data: List<FiveDaysWeather>) {
-        TODO("Not yet implemented")
+
+    }
+
+    override fun showWeatherData(data: WeatherData) {
+
+        with(binding) {
+            cityName2.text = bundle.putString("cityName", data.name ).toString()
+            cityName2.text = arguments.toString()
+            "${data.main.temp.roundToInt()} °C".also { degrees2.text = it }
+            "${data.wind.speed}  м/с".also { speedOfWindText.text = it }
+            "${data.clouds.all}  %".also { cloudiness.text = it }
+            "${data.main.pressure} гПа".also { pressureText.text = it }
+            "${data.main.humidity} %".also { humidityText.text = it }
+            "${data.visibility} KM".also { visibilityText.text = it }
+            "${data.wind.speed} KM".also { speedOfWindText2.text = it }
+            description2.text = if (data.weather.isNotEmpty())
+                data.weather.first().description
+            else print("sorry").toString()
+        }
     }
 
     override fun showErrorMessage(t: Throwable?) {
-        TODO("Not yet implemented")
+        Toast.makeText(requireContext(), t?.message, Toast.LENGTH_SHORT).show()
+        Timber.d("---->>>> ${t?.message}")
     }
 
     override fun showErrorMessage(messageRes: Int) {
-        TODO("Not yet implemented")
+        Toast.makeText(requireContext(), messageRes, Toast.LENGTH_SHORT).show()
+        Timber.d("---->>>> $messageRes")
     }
 
 

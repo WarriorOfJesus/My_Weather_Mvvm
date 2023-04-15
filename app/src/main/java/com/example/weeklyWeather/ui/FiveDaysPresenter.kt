@@ -1,17 +1,28 @@
 package com.example.weeklyWeather.ui
 
 import com.example.common.mvp.BasePresenter
+import com.example.myweather.interactor.WeatherInteractor
 import com.example.weeklyWeather.interactor.FiveDaysInteractor
 import timber.log.Timber
 
 class FiveDaysPresenter(
-    private val interactor: FiveDaysInteractor
+    private val interactor: FiveDaysInteractor,
+
 ) : BasePresenter<FiveDaysContract.View>(), FiveDaysContract.Presenter {
+    private val interactor2: WeatherInteractor
+        get() {
+            return interactor2
+        }
+
     override fun getWeatherData(city: String, key: String) {
         view?.showLoading(isLoading = true)
         if (city.length >= 3) {
             try {
                 view?.showLoading(isLoading = true)
+                val weather = interactor2.getWeatherData(city, key)
+                if (weather != null) {
+                    view?.showWeatherData(weather)
+                }
                 val data = interactor.getFiveDaysWeatherData(city, key)
                 val list = data.list
                 view?.showFiveDaysData(list)
