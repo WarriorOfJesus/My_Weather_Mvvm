@@ -13,24 +13,9 @@ import timber.log.Timber
 class WeatherRemoteRepository(
     private val api: WeatherApi
 ) : WeatherRepository {
-    private var weatherData: WeatherData? = null
 
-    override fun getWeatherData(city: String, key: String): WeatherData? {
-        api.getWeatherData(city, key).enqueue(object : Callback<WeatherDataResponse> {
-            override fun onResponse(
-                call: Call<WeatherDataResponse>,
-                response: Response<WeatherDataResponse>
-            ) {
-                if (response.isSuccessful && response.body() != null) {
-                    weatherData = WeatherConverter.fromNetwork(response.body())
-                } else
-                    weatherData = null
-            }
-
-            override fun onFailure(call: Call<WeatherDataResponse>, t: Throwable) {
-                Timber.e("WeatherData onResponse: " + t.message)
-            }
-        })
-        return weatherData
+    override suspend fun getWeatherData(city: String, key: String): WeatherData {
+        val response = api.getWeatherData(city, key)
+        return WeatherConverter.fromNetwork(response)
     }
 }

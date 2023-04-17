@@ -6,7 +6,7 @@
     <string name="enter_the_city_name">Enter the city name</string>
     <string name="cityName">CITY</string>
     <string name="degrees">0</string>
-    <string name="speed_of_wind">СКОРОСТЬ ВЕТРА</string>
+    <string name="speed_of_wind">СКОРОСТЬ/ВЕТРА</string>
     <string name="direction_of_wind">Направление ВЕТРА</string>
     <string name="cloudCover">Облачность</string>
     <string name="visibility">Видимость</string>

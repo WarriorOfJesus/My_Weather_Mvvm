@@ -1,8 +1,15 @@
 package com.example.common.mvp
 
 import androidx.annotation.CallSuper
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlin.coroutines.CoroutineContext
 
-abstract class BasePresenter<V : MvpView>: MvpPresenter<V> {
+abstract class BasePresenter<V : MvpView>: MvpPresenter<V>,CoroutineScope {
+
+    override val coroutineContext: CoroutineContext = SupervisorJob() + Dispatchers.Main.immediate
+
     protected var view: V? =  null
     private set
     @CallSuper

@@ -8,17 +8,16 @@ import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
-import androidx.lifecycle.ViewModel
-import com.example.myweather.R
-import com.example.myweather.api.RetrofitClient
 import com.example.common.mvp.BaseMvpFragment
-import com.example.myweather.databinding.FragmentWeatherBinding
+import com.example.details.DetailsWeatherFragment
+import com.example.myweather.R
 import com.example.myweather.api.WeatherApi
+import com.example.myweather.databinding.FragmentWeatherBinding
 import com.example.myweather.interactor.WeatherInteractor
 import com.example.myweather.model.WeatherData
 import com.example.myweather.repository.WeatherRemoteRepository
-import com.example.myweather.utils.changeFragment
-import com.example.weeklyWeather.ui.FragmentWeather2
+import com.example.utils.RetrofitClient
+import com.example.utils.replace
 import timber.log.Timber
 import kotlin.math.roundToInt
 
@@ -30,8 +29,8 @@ class WeatherFragment :
         getString(R.string.key)
     }
 
-    companion object{
-        fun getNewInstance(args:Bundle?):WeatherFragment{
+    companion object {
+        fun getNewInstance(args: Bundle?): WeatherFragment {
             val weatherFragment = WeatherFragment()
             weatherFragment.arguments = args
             return weatherFragment
@@ -39,7 +38,7 @@ class WeatherFragment :
     }
 
     private val api: WeatherApi =
-        RetrofitClient.getClient("https://api.openweathermap.org").create(WeatherApi::class.java)
+        RetrofitClient.getClient().create(WeatherApi::class.java)
 
     private val remoteRepository: WeatherRemoteRepository = WeatherRemoteRepository(api)
 
@@ -62,25 +61,10 @@ class WeatherFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
+
             editCity.doAfterTextChanged {
-                if (it != null) {
-                    if (it.isNotEmpty()) {
-                        it.toString()
-                            .let { city ->
-                                if (city != "") presenter.getDataFromApi(city, key)
-//                                showInfo()
-                            }
-                    }
-                    if (it.isEmpty()) {
-                        hideInfo()
-                        deleteInfo()
-                    }
-                }
-            }
-            buttonMoreInfo.setOnClickListener {
-                val fragment = FragmentWeather2()
-                fragment.arguments?.putAll(savedInstanceState)
-                changeFragment(fragment = fragment, R.id.fragmentContainer)
+                val cityName = editCity.text.toString()
+                check(cityName)
 
             }
         }
@@ -93,6 +77,10 @@ class WeatherFragment :
             description.text = if (data.weather.isNotEmpty())
                 data.weather.first().description
             else print("sorry").toString()
+
+            buttonMoreInfo.setOnClickListener {
+                replace(DetailsWeatherFragment.newInstance(data))
+            }
         }
     }
 
@@ -105,32 +93,15 @@ class WeatherFragment :
         binding.progress.isVisible = isLoading
     }
 
-    override fun showErrorMessage(t: Throwable?) {
-        Toast.makeText(requireContext(), t?.message, Toast.LENGTH_SHORT).show()
-        Timber.d("---->>>> ${t?.message}")
+    override fun showErrorMessage(t: Throwable) {
+
+        Toast.makeText(requireContext(), t.message, Toast.LENGTH_SHORT).show()
+        Timber.d("---->>>> ${t.message}")
     }
 
     override fun showErrorMessage(@StringRes messageRes: Int) {
         Toast.makeText(requireContext(), messageRes, Toast.LENGTH_SHORT).show()
         Timber.d("---->>>> $messageRes")
-    }
-//            binding.progress.isVisible = false
-
-    fun hideInfo() {
-        with(binding) {
-            progress.isVisible = false
-            cityName.isVisible = false
-            degrees.isVisible = false
-            description.isVisible = false
-        }
-    }
-
-    fun deleteInfo() {
-        with(binding) {
-            cityName.text = ""
-            degrees.text = ""
-            description.text = ""
-        }
     }
 
     override fun showInfo() {
@@ -140,4 +111,33 @@ class WeatherFragment :
             description.isVisible = true
         }
     }
+
+    private fun hideInfo() {
+        with(binding) {
+            progress.isVisible = false
+            cityName.isVisible = false
+            degrees.isVisible = false
+            description.isVisible = false
+        }
+    }
+
+    private fun deleteInfo() {
+        with(binding) {
+            cityName.text = ""
+            degrees.text = ""
+            description.text = ""
+        }
+    }
+
+    private fun check(cityName: String) {
+        if (cityName.isNotEmpty()) {
+            if (cityName != "") presenter.getDataFromApi(cityName, key)
+//                                showInfo()
+    }
+    if (cityName.isEmpty())
+    {
+        hideInfo()
+        deleteInfo()
+    }
+}
 }

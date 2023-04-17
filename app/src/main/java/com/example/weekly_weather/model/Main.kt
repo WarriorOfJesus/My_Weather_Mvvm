@@ -1,4 +1,4 @@
-package com.example.myweather.model
+package com.example.weekly_weather.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
@@ -10,7 +10,8 @@ data class Main(
     val temp_min: Double,
     val temp_max: Double,
     val pressure: Int,
-    val humidity: Int,
     val sea_level: Int,
-    val grnd_level: Int
+    val grnd_level: Int,
+    val humidity: Int,
+    val temp_kf: Double
 ):Parcelable
