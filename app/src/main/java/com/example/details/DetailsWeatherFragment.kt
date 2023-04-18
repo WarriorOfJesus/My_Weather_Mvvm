@@ -49,7 +49,7 @@ class DetailsWeatherFragment : BaseFragment(R.layout.fragment_details_weather) {
             "${data.clouds.all}  %".also { cloudiness.text = it }
             "${data.main.pressure} гПа".also { pressureText.text = it }
             "${data.main.humidity} %".also { humidityText.text = it }
-            "${data.visibility} KM".also { visibilityText.text = it }
+            "${data.visibility.div(1000)} KM".also { visibilityText.text = it }
             "${data.wind.speed} KM".also { speedOfWindText2.text = it }
             description2.text = if (data.weather.isNotEmpty())
                 data.weather.first().description

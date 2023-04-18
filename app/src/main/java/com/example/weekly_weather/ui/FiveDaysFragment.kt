@@ -65,8 +65,10 @@ class FiveDaysFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
-            recyclerView.layoutManager = linearLayoutManager
+            cityNameRecyclerView.text = cityName
             recyclerView.adapter = adapter
+            recyclerView.layoutManager = linearLayoutManager
+
             buttonBack.setOnClickListener {
                 requireActivity().supportFragmentManager.popBackStack()
             }
@@ -80,14 +82,7 @@ class FiveDaysFragment :
     }
 
     override fun showData(data: List<FiveDaysWeather>) {
-
         adapter.setData(data)
-    }
-
-    override fun showNameCity(data: WeatherData) {
-        with(binding) {
-            cityNameRecyclerView.text = data.name
-        }
     }
 
 

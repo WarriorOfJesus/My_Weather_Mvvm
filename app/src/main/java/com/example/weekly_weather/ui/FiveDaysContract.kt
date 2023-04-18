@@ -9,7 +9,6 @@ interface FiveDaysContract {
     interface View : MvpView {
         fun showLoading(isLoading: Boolean)
         fun showData(data: List<FiveDaysWeather>)
-        fun showNameCity(data: WeatherData)
     }
 
     interface Presenter : MvpPresenter<View> {
