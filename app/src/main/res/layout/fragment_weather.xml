@@ -52,6 +52,8 @@
             android:layout_height="80dp"
             android:layout_margin="20dp"
             android:backgroundTintMode="add"
+            android:drawableStart="@drawable/ic_search"
+            android:drawablePadding="8dp"
             android:hint="@string/enter_the_city_name"
             android:textColor="@color/black"
             android:textSize="24sp" />

@@ -3,8 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/weather_1"
-    tools:context="com.example.details.DetailsWeatherFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/weather_6"
+    tools:context="com.example.details_of_day.FragmentForAdditionalInfo">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -26,11 +27,11 @@
                 android:backgroundTint="@color/empty2" />
 
             <TextView
-                android:id="@+id/cityName2"
+                android:id="@+id/date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="12dp"
-                android:text="@string/cityName"
+                android:text="@string/dataName"
                 android:textColor="@color/black3"
                 android:textSize="35sp" />
 
@@ -38,27 +39,45 @@
         </com.google.android.material.bottomappbar.BottomAppBar>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-
-    <TextView
-        android:id="@+id/degrees2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:textSize="50sp"
-        android:text=""
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/info"
+        android:layout_width="250dp"
+        android:layout_height="150dp"
         android:layout_gravity="center"
-        android:layout_marginBottom="160dp"
-        />
+        android:layout_marginBottom="100dp"
+        android:background="@color/black2"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/description2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:textColor="@color/white"
-        android:textSize="40sp"
-        android:layout_gravity="center"
-        android:layout_marginBottom="90dp"/>
+        <ImageView
+            android:id="@+id/iconDegrees"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@drawable/degrees"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/degrees2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="50sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iconDegrees"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/description2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="35sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <LinearLayout
@@ -92,7 +111,7 @@
             android:layout_gravity="center"
             android:text=""
             android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
     </LinearLayout>
 
@@ -128,7 +147,7 @@
             android:layout_gravity="center"
             android:text=""
             android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
     </LinearLayout>
 
@@ -154,7 +173,7 @@
             android:layout_gravity="center"
             android:text="@string/visibility"
             android:textColor="@color/black"
-            android:textSize="14sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/visibilityText"
@@ -163,7 +182,7 @@
             android:layout_gravity="center"
             android:text=""
             android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
     </LinearLayout>
 
@@ -190,7 +209,7 @@
             android:layout_gravity="center"
             android:text="@string/humidity"
             android:textColor="@color/black"
-            android:textSize="14sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/humidityText"
@@ -199,27 +218,8 @@
             android:layout_gravity="center"
             android:text=""
             android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:id="@+id/infaFor5days"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="40dp"
-
-        android:orientation="vertical">
-
-        <Button
-            android:id="@+id/buttonInfoFor5days"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:backgroundTint="@color/empty"
-            android:text="@string/_5_day_forecast" />
     </LinearLayout>
 
 
@@ -254,7 +254,7 @@
             android:layout_gravity="center"
             android:text=""
             android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
     </LinearLayout>
 
@@ -279,9 +279,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/wind_direction"
-
             android:textColor="@color/black"
-            android:textSize="13sp" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/tvWindDirection"

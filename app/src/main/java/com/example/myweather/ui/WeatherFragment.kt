@@ -11,13 +11,10 @@ import androidx.core.widget.doAfterTextChanged
 import com.example.common.mvp.BaseMvpFragment
 import com.example.details.DetailsWeatherFragment
 import com.example.myweather.R
-import com.example.myweather.api.WeatherApi
 import com.example.myweather.databinding.FragmentWeatherBinding
-import com.example.myweather.interactor.WeatherInteractor
 import com.example.myweather.model.WeatherData
-import com.example.myweather.repository.WeatherRemoteRepository
-import com.example.utils.RetrofitClient
 import com.example.utils.replace
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 import kotlin.math.roundToInt
 
@@ -28,6 +25,7 @@ class WeatherFragment :
     private val key: String by lazy {
         getString(R.string.key)
     }
+    override val presenter: WeatherPresenter by viewModel()
 
     companion object {
         fun getNewInstance(args: Bundle?): WeatherFragment {
@@ -37,13 +35,6 @@ class WeatherFragment :
         }
     }
 
-    private val api: WeatherApi =
-        RetrofitClient.getClient().create(WeatherApi::class.java)
-
-    private val remoteRepository: WeatherRemoteRepository = WeatherRemoteRepository(api)
-
-    private val interactor: WeatherInteractor = WeatherInteractor(remoteRepository)
-    override val presenter: WeatherPresenter = WeatherPresenter(interactor)
 
 
     private lateinit var binding: FragmentWeatherBinding
@@ -70,6 +61,7 @@ class WeatherFragment :
         }
     }
 
+
     override fun showWeatherData(data: WeatherData) {
         with(binding) {
             cityName.text = data.name
@@ -94,7 +86,6 @@ class WeatherFragment :
     }
 
     override fun showErrorMessage(t: Throwable) {
-
         Toast.makeText(requireContext(), t.message, Toast.LENGTH_SHORT).show()
         Timber.d("---->>>> ${t.message}")
     }
@@ -133,11 +124,14 @@ class WeatherFragment :
         if (cityName.isNotEmpty()) {
             if (cityName != "") presenter.getDataFromApi(cityName, key)
 //                                showInfo()
+        }
+        if (cityName.isEmpty()) {
+            hideInfo()
+            deleteInfo()
+        }
     }
-    if (cityName.isEmpty())
-    {
-        hideInfo()
-        deleteInfo()
+    override fun onDestroy() {
+        super.onDestroy()
+        requireActivity().finish()
     }
-}
 }

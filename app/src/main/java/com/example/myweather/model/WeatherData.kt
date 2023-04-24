@@ -5,7 +5,6 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class WeatherData(
-    val coord: Coord,
     val weather: List<Weather>,
     val base: String,
     val main: Main,
@@ -15,7 +14,5 @@ data class WeatherData(
     val dt: Long,
     val sys: Sys,
     val timezone: Int,
-    val id: Int,
     val name: String,
-    val cod: Int
 ):Parcelable

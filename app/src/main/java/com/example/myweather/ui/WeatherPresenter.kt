@@ -11,7 +11,7 @@ class WeatherPresenter(
     private val interactor: WeatherInteractor
 ) : BasePresenter<WeatherContract.View>(), WeatherContract.Presenter {
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
-
+//BasePresenter<WeatherContract.View>(), WeatherContract.Presenter
     override fun getDataFromApi(cityName: String, key: String) {
         view?.showLoading(true)
         if (cityName.length >= 3) {
@@ -22,7 +22,9 @@ class WeatherPresenter(
                     view?.showInfo()
                 } catch (t: Throwable) {
                     Timber.d("error get weather---->>>> ${t.message}")
-                    view?.showErrorMessage(t)
+                    if (t.message?.contains("404") == false) {
+                        view?.showErrorMessage(t)
+                    }
                 } finally {
                     view?.showLoading(false)
                 }

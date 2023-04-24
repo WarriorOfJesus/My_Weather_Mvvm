@@ -10,7 +10,7 @@ import kotlinx.android.parcel.Parcelize
 data class FiveDaysWeather(
     val dt: Long,
     val main: Main,
-    val weather: List<Weather>,
+    val weather: List<Weather>?,
     val clouds: Clouds,
     val wind: Wind,
     val visibility: Int,

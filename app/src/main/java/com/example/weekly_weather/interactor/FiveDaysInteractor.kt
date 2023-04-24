@@ -1,6 +1,5 @@
 package com.example.weekly_weather.interactor
 
-import com.example.weekly_weather.model.FiveDays
 import com.example.weekly_weather.repository.FiveDaysRemoteRepository
 
 class FiveDaysInteractor(

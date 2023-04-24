@@ -5,7 +5,6 @@ import com.example.myweather.api.models.*
 object WeatherConverter {
     fun fromNetwork(response: WeatherDataResponse?): WeatherData {
         return WeatherData(
-            coord = response?.let { fromNetwork(it.coord) } ?: Coord(0.0, 0.0),
             weather = response?.let { fromNetworkWeather(it.weather) } ?: emptyList(),
             base = response?.base ?: "",
             main = response?.let { fromNetwork(it.main) } ?: Main(0.0, 0.0, 0.0, 0.0, 0, 0, 0, 0),
@@ -15,18 +14,10 @@ object WeatherConverter {
             dt = response?.dt ?: 0,
             sys = response?.let { fromNetwork(it.sys) } ?: Sys(0, 0, "", 0, 0),
             timezone = response?.timezone ?: 0,
-            id = response?.id ?: 0,
             name = response?.name ?: "",
-            cod = response?.cod ?: 0
         )
     }
 
-    private fun fromNetwork(response: CoordResponse): Coord {
-        return Coord(
-            lon = response.lon,
-            lat = response.lat
-        )
-    }
 
     private fun fromNetwork(response: MainResponse): Main {
         return Main(
@@ -74,5 +65,9 @@ object WeatherConverter {
                 icon = data.icon
             )
         }
+    }
+
+    private fun fromNetworkDescription(response: List<WeatherResponse>): String {
+        return response[0].description.toString().replaceFirstChar { it.uppercase() }
     }
 }
